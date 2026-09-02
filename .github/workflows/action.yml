@@ -1,17 +1,18 @@
-name: Multiple job parallel 
+name: my-workflow 
 on: workflow_dispatch 
 jobs: 
- first-job: 
+  first-job: 
     runs-on: ubuntu-latest 
     steps: 
-     - name: first-step 
-       run: echo "Hello World" 
-     - name: second-step 
-       uses: actions/checkout@v6 
- second-job: 
+      - name: first-step 
+        run: echo "Hello World" 
+      - name: second-step 
+        uses: actions/checkout@v6 
+  second-job: 
+    needs: first-job 
     runs-on: ubuntu-latest 
     steps: 
-     - name: test-step 
-       run: echo "This is a test step" 
-     - name: test-code 
-       uses: actions/checkout@v6 
+       - name: test-step 
+         run: echo "This is a test step" 
+       - name: test-code 
+         uses: actions/checkout@v6 
