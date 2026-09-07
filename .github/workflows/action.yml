@@ -1,18 +1,14 @@
-name: my-workflow 
-on: [workflow_dispatch, push] 
+name: Python-CI 
+on: push 
 jobs: 
-  first-job: 
-    runs-on: ubuntu-latest 
-    steps: 
-      - name: first-step 
-        run: echo "Hello World" 
-      - name: second-step 
-        uses: actions/checkout@v6 
-  second-job: 
-    needs: first-job
-    runs-on: ubuntu-latest 
-    steps: 
-       - name: test-step 
-         run: echo "This is a test step" 
-       - name: test-code 
-         uses: actions/checkout@v6 
+    build: 
+        runs-on: ubuntu-latest 
+        steps: 
+            - name: Checkout code 
+              uses: actions/checkout@v6 
+            - name: Set up Python 
+              uses: actions/setup-python@v4 
+              with: 
+                python-version: '3.12' 
+            - name: Show Python version 
+              run: python --version 
